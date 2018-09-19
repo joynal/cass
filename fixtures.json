@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "_id": "5ba113b31654423835c78752",
+      "name": "Electronics",
+      "type": "expense"
+    },
+    {
+      "_id": "5ba1163bbade8238590e2bd4",
+      "name": "Shopping",
+      "type": "expense"
+    },
+    {
+      "_id": "5ba11644bade8238590e2bd5",
+      "name": "Doctor",
+      "type": "expense"
+    },
+    {
+      "_id": "5ba11a233ef69c392fb69204",
+      "name": "Salary",
+      "type": "income"
+    }
+  ],
+  "entries": [
+    {
+      "_id": "5ba117c8bade8238590e2bd7",
+      "price": 30,
+      "note": "Tea pot",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "expense",
+      "categoryId": "5ba1163bbade8238590e2bd4"
+    },
+    {
+      "_id": "5ba117d3bade8238590e2bd8",
+      "price": 40,
+      "note": "Soap",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "expense",
+      "categoryId": "5ba1163bbade8238590e2bd4"
+    },
+    {
+      "_id": "5ba11812bade8238590e2bd9",
+      "price": 3700,
+      "note": "Laptop",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "expense",
+      "categoryId": "5ba113b31654423835c78752"
+    },
+    {
+      "_id": "5ba118bc3ef69c392fb69203",
+      "price": 1400,
+      "note": "Phone",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "expense",
+      "categoryId": "5ba113b31654423835c78752"
+    },
+    {
+      "_id": "5ba11a5c3ef69c392fb69205",
+      "price": 3000,
+      "note": "Monthly Salary",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "income",
+      "categoryId": "5ba11a233ef69c392fb69204"
+    },
+    {
+      "_id": "5ba1269737d56a3cd1ef4dde",
+      "price": 400,
+      "note": "Doctor visit fee",
+      "date": "2018-09-18T15:18:50.158Z",
+      "type": "expense",
+      "categoryId": "5ba11644bade8238590e2bd5"
+    }
+  ]
+}
