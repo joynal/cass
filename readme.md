@@ -50,7 +50,7 @@ You will get something like this.
 Mutations:
 ```javascript
 mutation CreateCategory {
-  addCategory(input: { name: "Bills & Utilities", type: "expnese" }) {
+  addCategory(input: { name: "Bills & Utilities", type: "expense" }) {
     name
   }
 }
