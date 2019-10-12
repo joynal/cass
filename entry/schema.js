@@ -1,51 +1,61 @@
+const { gql } = require('apollo-server');
+
 const Entry = require('./model');
 const Category = require('../category/model');
 
-const entryTypeDefs = `
-    type Entry {
-        id: ID!
-        price: Int!
-        note: String
-        date: String
-        type: String
-        categoryId: String
-        category: Category
-    }
+const entryTypeDefs = gql`
+  type Entry {
+    id: ID!
+    price: Int!
+    note: String
+    date: String
+    type: String
+    categoryId: String
+    category: Category
+  }
 
-    type Stat {
-      inflow: Int
-      outflow: Int
-    }
+  type Stat {
+    inflow: Int
+    outflow: Int
+  }
 
-    input EntryFilterInput {
-        limit: Int
-    }
+  input Pagination {
+    limit: Int
+    offset: Int
+  }
 
-    extend type Query {
-        entries(filter: EntryFilterInput): [Entry]
-        entry(id: String!): Entry
-        stats: Stat
-    }
+  extend type Query {
+    entries(filter: Pagination): [Entry]
+    entry(id: String!): Entry
+    stats: Stat
+  }
 
-    input EntryInput {
-        price: Int!
-        note: String
-        date: String
-        categoryId: String!
-    }
+  input EntryInput {
+    price: Int!
+    note: String
+    date: String
+    categoryId: String!
+  }
 
-    extend type Mutation {
-        addEntry(input: EntryInput!): Entry
-        editEntry(id: String!, input: EntryInput!): Entry
-        deleteEntry(id: String): Entry
-    }
+  extend type Mutation {
+    addEntry(input: EntryInput!): Entry
+    editEntry(id: String!, input: EntryInput!): Entry
+    deleteEntry(id: String): Entry
+  }
 `;
 
 const entryResolvers = {
   Query: {
     entries: async (_, { filter = {} }) => {
-      const entries = await Entry.find({}, null, filter);
-      return entries.map(entry => entry.toGraph());
+      const limit = filter.limit || 20;
+      const offset = filter.offset || 0;
+
+      const entries = await Entry.find()
+        .limit(Number(limit))
+        .skip(Number(offset))
+        .sort({ createdAt: 'desc' });
+
+      return entries.map((entry) => entry.toGraph());
     },
 
     entry: async (_, { id }) => {
@@ -86,7 +96,7 @@ const entryResolvers = {
 
         return new Error('Category not found');
       } catch (error) {
-        console.log('add entry ---->', error);
+        console.error('add entry err:', error);
         return error;
       }
     },
@@ -96,13 +106,16 @@ const entryResolvers = {
         const category = Category.findOne({ _id: input.categoryId });
 
         if (input.categoryId && category) {
-          const entry = await Entry.findByIdAndUpdate(id, { ...input, type: category.type });
+          const entry = await Entry.findByIdAndUpdate(id, {
+            ...input,
+            type: category.type,
+          });
           return entry.toGraph();
         }
 
         return new Error('Category not found');
       } catch (error) {
-        console.log('edit entry ---->', error);
+        console.error('edit entry err:', error);
         return error;
       }
     },
@@ -112,7 +125,7 @@ const entryResolvers = {
         const entry = await Entry.findByIdAndRemove(id);
         return entry ? entry.toGraph() : null;
       } catch (error) {
-        console.log('delete entry ---->', error);
+        console.error('delete entry err:', error);
         return error;
       }
     },
