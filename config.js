@@ -1,3 +1,3 @@
 module.exports = {
-  mongodbUrl: 'mongodb://localhost:27017/graphql-demo',
+  mongodbUrl: 'mongodb://localhost:27017/cass',
 };
