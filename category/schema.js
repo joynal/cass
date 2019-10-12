@@ -35,8 +35,8 @@ const categoryResolvers = {
       const offset = filter.offset || 0;
 
       const categories = await Category.find()
-        .limit(Number(limit))
-        .skip(Number(offset))
+        .limit(limit)
+        .skip(offset)
         .sort({ createdAt: 'desc' });
 
       return categories.map((category) => category.toGraph());

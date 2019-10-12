@@ -51,8 +51,8 @@ const entryResolvers = {
       const offset = filter.offset || 0;
 
       const entries = await Entry.find()
-        .limit(Number(limit))
-        .skip(Number(offset))
+        .limit(limit)
+        .skip(offset)
         .sort({ createdAt: 'desc' });
 
       return entries.map((entry) => entry.toGraph());
