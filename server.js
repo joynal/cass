@@ -1,21 +1,20 @@
-const { ApolloServer } = require('apollo-server');
-const { makeExecutableSchema } = require('graphql-tools');
 const mongoose = require('mongoose');
+const { ApolloServer, gql } = require('apollo-server');
+const { makeExecutableSchema } = require('graphql-tools');
 
+const { mongodbUrl } = require('./config');
 const { entryResolvers, entryTypeDefs } = require('./entry/schema');
 const { categoryResolvers, categoryTypeDefs } = require('./category/schema');
 
-const { mongodbUrl } = require('./config');
-
 mongoose.connect(mongodbUrl, { useNewUrlParser: true });
 
-const rootTypeDefs = `
-    type Query
-    type Mutation
-    schema {
-        query: Query
-        mutation: Mutation
-    }
+const rootTypeDefs = gql`
+  type Query
+  type Mutation
+  schema {
+    query: Query
+    mutation: Mutation
+  }
 `;
 
 const schema = makeExecutableSchema({
@@ -37,7 +36,7 @@ const schema = makeExecutableSchema({
 const server = new ApolloServer({
   schema,
   formatError(error) {
-    console.log('server error ---->', error);
+    console.log('server error:', error);
     return error;
   },
 });

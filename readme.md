@@ -11,7 +11,7 @@ Change your MongoDB database URL at `config.js`
 
 ## Start the server
 ```
-$ node index.js
+$ node server.js
 ```
 
 ## Generate dummy data
