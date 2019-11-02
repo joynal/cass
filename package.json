@@ -13,7 +13,7 @@
     "apollo-server": "^2.9.6",
     "graphql": "^14.5.8",
     "graphql-tools": "^4.0.5",
-    "mongoose": "5.2.15"
+    "mongoose": "5.7.5"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
